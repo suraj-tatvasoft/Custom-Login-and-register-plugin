@@ -206,10 +206,9 @@ class Custom_Login_Plugin {
                 $login_url = home_url( 'member-login' );
                 
                 $login_url = add_query_arg( 'login', $error_codes, $login_url );
-                $_SESSION["user_status"] =  "active";
                 $_SESSION["redirect_url"] = $login_url;
                 wp_redirect( $login_url );
-                exit;
+                // exit;
             }
         }
         // check user is activate or deactivate
@@ -411,7 +410,7 @@ class Custom_Login_Plugin {
             $response['in_valid_email'] = "";
         	if($user){
                 $user_check = wp_authenticate_email_password( $user, $email, $password );
-                if($user_check) {
+                if($password_check == true) {
                     $display_name = $user_check->display_name;
                     $user_login = $user_check->user_login;
                     $creds = array();
@@ -435,8 +434,8 @@ class Custom_Login_Plugin {
                     }
                        
                 } else {
-                    // $response["redirect_url"] = $_SESSION["redirect_url"];
-                    $response["error"] =  "Invalid login credentials.";
+                    $response["redirect_url"] = site_url("/member-login/?invalid_pass=true");
+                    // $response["error"] =  "Please enter correct password.";
                 }
         	}else{
                 $response['in_valid_email'] = "Your email id not register.";

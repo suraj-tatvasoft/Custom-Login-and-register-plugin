@@ -15,8 +15,8 @@
     }
 
     $invalid_pass = "";
-    if(isset($_GET["rese_password"]) && $_GET["rese_password"] != ""){
-        $reset_message = "Your reset password link send your email please check your email.";
+    if(isset($_GET["invalid_pass"]) && $_GET["invalid_pass"] != ""){
+        $invalid_pass = "Please enter correct password.";
     }
 
 ?>
@@ -31,6 +31,9 @@
         }
         if(!empty($reset_message)){
             echo "<p style='color: #000000; '> ".$reset_message." </p>";
+        }
+        if(!empty($invalid_pass)){
+            echo "<p style='color: #000000; '> ".$invalid_pass." </p>";
         }
     ?>
     <form method="post" action="">
